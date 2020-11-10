@@ -21,11 +21,11 @@
         }
         header img {
             max-height:8rem;
+            position: absolute;
+            right:0;
         }
         header {
-            font-weight: bold;
             font-size: 2rem;
-            font-family: Times New Roman, serif;
             padding-bottom: 2rem;
             margin-bottom: 1rem;
         }
@@ -42,15 +42,22 @@
             font-size: 1rem;
             display:block;
         }
+        header .header-title {
+            min-height:130px;
+        }
         @media (max-width: 577px) {
+            h1 {
+                text-align: center;
+            }
             header .title {
-                font-size: 2rem;
+                font-size: 1.5rem;
+                font-weight: bold;
             }
             header .subtitle {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             header .subsubtitle {
-                font-size: 0.8rem;
+                font-size: 0.7rem;
             }
         }
 
@@ -104,10 +111,10 @@
 <body>
     <header class="container">
         <div class="row">
-            <div class="col-sm-3 d-flex align-items-center">
+            <div class="col-4 col-sm-3 d-flex align-items-center">
                 <img src="https://www.scottfinlay.xyz/dev/muenchen-logo.svg" alt="Logo" />
             </div>
-            <div class="col-sm-9 d-flex align-items-center">
+            <div class="header-title col-8 col-sm-9 d-flex align-items-center">
                 <div>
                 <span class="title">Landeshauptstadt München</span>
                 <span class="subtitle">Referat für Gesundheit und Umwelt</span>
@@ -118,7 +125,7 @@
     </header>
 
     <div class="mainContent container">
-        <h1 class="row justify-content-md-center">Covid-19 Fragebogen</h1>
+        <h1 class="row justify-content-center">Covid-19 Fragebogen</h1>
 
         <p>Bitte füllen Sie diesen Fragebogen vollständig und richtig aus. Im Anschluss erhalten Sie ein Bescheinigung
             Ihrer vorläufigen Quarantänezeit an Ihre angegebene E-mail-Adresse.</p>
