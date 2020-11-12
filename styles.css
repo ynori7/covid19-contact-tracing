@@ -1,0 +1,120 @@
+body{
+    background-color:#eee;
+}
+
+.mainContent {
+    padding-top:2rem;
+    padding-bottom:2rem;
+}
+
+/* Header / Footer */
+header img {
+    max-height:8rem;
+    position: absolute;
+    right:0;
+}
+header {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+header .title {
+    font-size: 3rem;
+    display:block;
+}
+header .subtitle {
+    font-size: 1.5rem;
+    display:block;
+}
+header .subsubtitle {
+    font-weight: normal;
+    font-size: 1rem;
+    display:block;
+}
+header .header-title {
+    min-height:130px;
+}
+@media (max-width: 577px) {
+    h1 {
+        text-align: center;
+    }
+    header .title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    header .subtitle {
+        font-size: 0.9rem;
+    }
+    header .subsubtitle {
+        font-size: 0.7rem;
+    }
+}
+
+footer {
+    margin-top:1rem;
+}
+
+header, footer, .mainContent {
+    background-color:white;
+}
+
+/* Headings */
+h3:after {
+    content:"";
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 0;
+    height: 0.5em;
+    border-top: 1px solid #ccc;
+    z-index: -1;
+}
+h3 span {
+    background-color:white;
+    padding-right:1rem;
+}
+
+h1 {
+    margin-bottom:2rem;
+}
+
+/* Form */
+form label, form legend {
+    font-weight:bold;
+}
+#symptomsList label, #preconditionsList label {
+    font-weight: normal;
+}
+form section {
+    margin-bottom:2rem;
+}
+
+.form-group.required label:before {
+    content:"* ";
+    color:#ff0000;
+}
+.form-group.required select option[value=""], span.required {
+    color:#ff0000;
+}
+
+input.otherPreconditions {
+    display: inline-block;
+    width: 150px;
+    height: 1.2rem;
+}
+label.otherPreconditions {
+    display: inline-block;
+    width: 75px;
+}
+
+#contactPersonList .contactPerson {
+    border: solid 1px #ccc;
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+}
+
+@media (max-width: 767px) {
+    #contactPersonList .contactPerson {
+        margin-left: 0;
+    }
+}

@@ -4,109 +4,10 @@
     <meta http-equiv='content-script-type' content='text/javascript'/>
     <meta http-equiv='content-style-type' content='text/css'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <style>
-        h1 {
-            margin-bottom:2rem;
-        }
-        form label, form legend {
-            font-weight:bold;
-        }
-        #symptomsList label, #preconditionsList label {
-            font-weight: normal;
-        }
-        form section {
-            margin-bottom:2rem;
-        }
-        header img {
-            max-height:8rem;
-            position: absolute;
-            right:0;
-        }
-        header {
-            font-size: 2rem;
-            padding-bottom: 2rem;
-            margin-bottom: 1rem;
-        }
-        header .title {
-            font-size: 3rem;
-            display:block;
-        }
-        header .subtitle {
-            font-size: 1.5rem;
-            display:block;
-        }
-        header .subsubtitle {
-            font-weight: normal;
-            font-size: 1rem;
-            display:block;
-        }
-        header .header-title {
-            min-height:130px;
-        }
-        @media (max-width: 577px) {
-            h1 {
-                text-align: center;
-            }
-            header .title {
-                font-size: 1.5rem;
-                font-weight: bold;
-            }
-            header .subtitle {
-                font-size: 0.9rem;
-            }
-            header .subsubtitle {
-                font-size: 0.7rem;
-            }
-        }
-
-        footer {
-            margin-top:1rem;
-        }
-
-        h3:after {
-            content:"";
-            position: absolute;
-            bottom: 0;
-            left: 1rem;
-            right: 0;
-            height: 0.5em;
-            border-top: 1px solid #ccc;
-            z-index: -1;
-        }
-        h3 span {
-            background-color:white;
-            padding-right:1rem;
-        }
-
-        .form-group.required label:before {
-            content:"* ";
-            color:#ff0000;
-        }
-        .form-group.required select option[value=""], span.required {
-            color:#ff0000;
-        }
-        body{
-            background-color:#eee;
-        }
-        header, footer, .mainContent {
-            background-color:white;
-        }
-        .mainContent {
-            padding-top:2rem;
-            padding-bottom:2rem;
-        }
-        input.otherPreconditions {
-            display: inline-block;
-            width: 150px;
-            height: 1.2rem;
-        }
-        label.otherPreconditions {
-            display: inline-block;
-            width: 75px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="container">
@@ -160,7 +61,7 @@
                 <div class="form-group col-sm-6 row">
                     <label class="col-sm-6 col-md-4 col-form-label" for="birthdate">Geburtsdatum</label>
                     <div class="col-sm-6 col-md-8">
-                        <input type="text" readonly class="form-control-plaintext" id="birthdate" name="birthdate" placeholder="01-01-1985">
+                        <input type="text" readonly class="form-control-plaintext" id="birthdate" name="birthdate" value="01-01-1985">
                     </div>
                 </div>
             </section>
@@ -1348,14 +1249,19 @@
             </section>
 
             <!-- Contact persons -->
-            <section class="row">
+            <div class="row">
                 <h3 class="col-sm-12"><span>Kontaktpersonen</span></h3>
-
                 <div class="col-sm-12">
                     <p>Melden Sie uns alle Personen mit denen Sie im Zeitraum von 2 Tagen <strong>vor</strong> Symptombeginn bzw. bei Symptomfreiheit 7 Tage <strong>vor</strong> positiver Testung engen Kontakt
                         (<a href="https://www.muenchen.de/rathaus/Stadtverwaltung/Referat-fuer-Gesundheit-und-Umwelt/Infektionsschutz/Neuartiges_Coronavirus/Informationen-f-r-Kontaktpersonen.html#1" target="_blank">Wer ist Kontaktpersonen 1. Grades?</a>) hatten.</p>
+                </div>
+            </div>
 
-                    <button type="button" class="btn btn-primary" onclick="alert('Dieser Button funktioniert noch nicht')">Kontaktperson hinzufügen</button>
+            <section class="row d-none" id="contactPersonList"></section>
+
+            <section class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary" onclick="addContactPerson()">+ Kontaktperson hinzufügen</button>
                 </div>
             </section>
 
@@ -1386,92 +1292,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-    <script>
-        function toggleSection(id, show) {
-            if(show) {
-                $(id).removeClass("d-none")
-            } else {
-                $(id).addClass("d-none")
-            }
-        }
-
-        function checkCountry() {
-            if($("#infectionSource-country").val() == "DE") {
-                toggleSection("#infectionSourceAddress", true)
-            } else {
-                toggleSection("#infectionSourceAddress", false)
-            }
-        }
-
-        $( function() {
-            $( ".datepicker" ).datepicker({
-                dateFormat: 'dd-mm-yy',
-                maxDate: '0'
-            });
-        } );
-
-        var jsonForm = {}
-
-        function buildForm() {
-            $('input[type=text], input[type=checkbox]:checked, select, textarea').each(function(e) {
-                var t = $( this );
-
-                var name = t.attr('name');
-                var val = t.val();
-                var path = t.attr('data-object');
-
-                if(!name || !path) {
-                    return;
-                }
-
-                if(t.attr('type') == 'checkbox') {
-                    pushAtPath(path, name, val);
-                } else {
-                    setAtPath(path, name, val);
-                }
-            })
-        }
-
-        $(function() {
-            $('#survey').submit(function() {
-                buildForm();
-
-                $.post("https://www.scottfinlay.xyz/dev/corona-form-submit.php", {"body": JSON.stringify(jsonForm)}, function (data) {
-                    $('.mainContent').first().html("<pre>"+JSON.stringify(data, undefined, 4)+"</pre>");
-                });
-
-                return false;
-            });
-        });
-
-        function setAtPath(path, name, val) {
-            if(path == '/') {
-                jsonForm[name] = val;
-            } else {
-                current = jsonForm;
-                path.split('/').slice(1).forEach(function(elem){
-                    current[elem] = current[elem] || {};
-                    current = current[elem];
-                });
-                current[name] = val;
-            }
-        }
-
-        function pushAtPath(path, name, val) {
-            if(path == '/') {
-                jsonForm[name] = jsonForm[name] || [];
-                jsonForm[name].push(val);
-            } else {
-                current = jsonForm;
-                path.split('/').slice(1).forEach(function(elem){
-                    current[elem] = current[elem] || {};
-                    current = current[elem];
-                });
-                current[name] = current[name] || [];
-                current[name].push(val);
-            }
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
