@@ -1,9 +1,9 @@
 /* Display functions */
 function toggleSection(id, show) {
     if(show) {
-        $(id).removeClass("d-none")
+        $(id).show('slow')
     } else {
-        $(id).addClass("d-none")
+        $(id).hide('slow')
     }
 }
 
@@ -102,8 +102,8 @@ var contactPersonIndex = 0;
 function addContactPerson() {
     markup = getContactPersonMarkup(contactPersonIndex);
 
-    toggleSection("#contactPersonList", true)
     $('#contactPersonList').append(markup);
+    toggleSection("#contactPersonList", true)
 
     $('html, body').animate({
         scrollTop: $('#contact-person-'+contactPersonIndex).offset().top
