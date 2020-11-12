@@ -105,11 +105,16 @@ function addContactPerson() {
     toggleSection("#contactPersonList", true)
     $('#contactPersonList').append(markup);
 
+    $('html, body').animate({
+        scrollTop: $('#contact-person-'+contactPersonIndex).offset().top
+    }, 500);
+
     contactPersonIndex++;
 }
 
 function getContactPersonMarkup(index) {
-    return '<div class="col-sm-12 col-md-10 offset-md-1 row contactPerson">\n' +
+    return '<div class="col-sm-12 col-md-10 offset-md-1 row contactPerson" id="contact-person-'+index+'">\n' +
+        '                    <button type="button" class="x" onclick="$(this).parent().slideUp(400, function(){ $(this).remove();});">X</button>\n' +
         '                    <div class="form-group col-sm-6 row required">\n' +
         '                        <label for="contact-person-givenname' + index + '" class="col-sm-12">Vorname</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +

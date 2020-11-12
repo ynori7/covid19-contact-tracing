@@ -118,3 +118,11 @@ label.otherPreconditions {
         margin-left: 0;
     }
 }
+
+button.x {
+    position: absolute;
+    background: #ccc;
+    color: white;
+    top: 0;
+    right: 0;
+}
