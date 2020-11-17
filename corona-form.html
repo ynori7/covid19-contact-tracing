@@ -98,7 +98,7 @@
                     <select name="livingSituation" id="livingSituation" class="col-sm-12 custom-select" data-object="/address/primary">
                         <option value="" selected>Bitte auswählen</option>
                         <option value="Haus/Wohnung">Haus/Wohnung</option>
-                        <option value="Wohnheim">Wohnheim</option>
+                        <option value="Wohnheim/Gemeinschaftsunterkunft">Wohnheim/Gemeinschaftsunterkunft</option>
                         <option value="Kinder-/Jungendheim">Kinder-/Jungendheim</option>
                         <option value="Pflegeheim/Altenheim">Pflegeheim/Altenheim</option>
                         <option value="Obdachlos">Obdachlos</option>
@@ -536,8 +536,63 @@
                 </div>
 
                 <div id="infectionSource" class="col-sm-12 row no-gutters" style="display:none">
-                    <h4 class="col-sm-12">Infektionsort</h4>
+                    <!-- Infection contact person -->
+                    <h4 class="col-sm-12">Person</h4>
+                    <div class="col-sm-12 row">
+                        <div class="form-group col-sm-6 row required">
+                            <label for="infectionSource-givenname" class="col-sm-12 col-form-label">Vorname</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="col-sm-10 form-control" id="infectionSource-givenname" placeholder="Muster" name="givenname" data-object="/infectionSource/person">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 row required">
+                            <label for="infectionSource-familyname" class="col-sm-12 col-form-label">Nachname</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="col-sm-10 form-control" id="infectionSource-familyname" name="familyname" placeholder="Maxmann" data-object="/infectionSource/person">
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-sm-12 row">
+                        <div class="form-group col-sm-6 row">
+                            <label class="col-sm-12" for="infectionSource-address-street">Straße/Hausnummer</label>
+                            <div class="col-sm-12 row no-gutters">
+                                <input type="text" class="col-sm-10 form-control" id="infectionSource-address-street" name="street" placeholder="Straße" data-object="/infectionSource/person/address">
+                                <input type="text" class="col-sm-2 form-control" id="infectionSource-address-house" name="house" placeholder="Nr." data-object="/infectionSource/person/address">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6 row">
+                            <label class="col-sm-12" for="infectionSource-address-zip">Postleitzahl</label>
+                            <div class="col-sm-12 row no-gutters">
+                                <input type="text" class="col-sm-10 form-control" id="infectionSource-address-zip" name="zip" placeholder="PLZ" data-object="/infectionSource/person/address">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6 row">
+                            <label class="col-sm-12" for="infectionSource-address-city">Stadt</label>
+                            <div class="col-sm-12 row no-gutters">
+                                <input type="text" class="col-sm-10 form-control" id="infectionSource-address-city" name="city" placeholder="München" data-object="/infectionSource/person/address">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6 row required">
+                        <label class="col-sm-12" for="infectionSource-address-phone">Telefon</label>
+                        <div class="col-sm-12 row no-gutters">
+                            <input type="text" class="col-sm-10 form-control" id="infectionSource-address-phone" name="phone" placeholder="0891234567" data-object="/infectionSource/person/contact">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6 row">
+                        <label class="col-sm-12" for="infectionSource-address-email">E-mail</label>
+                        <div class="col-sm-12 row no-gutters">
+                            <input type="email" class="col-sm-10 form-control" id="infectionSource-address-email" name="email" placeholder="abc@mail.de" data-object="/infectionSource/person/contact">
+                        </div>
+                    </div>
+
+
+                    <h4 class="col-sm-12">Infektionsort</h4>
                     <!-- Infection address -->
                     <select id="infectionSource-country" name="country" onchange="checkCountry()" class="col-sm-12 custom-select mb-3" data-object="/infectionSource/address">
                         <option value="DE" selected>Deutschland</option>
@@ -878,61 +933,6 @@
                         </div>
                     </div>
 
-                    <!-- Infection contact person -->
-                    <h4 class="col-sm-12">Person</h4>
-                    <div class="col-sm-12 row">
-                        <div class="form-group col-sm-6 row required">
-                            <label for="infectionSource-givenname" class="col-sm-12 col-form-label">Vorname</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="col-sm-10 form-control" id="infectionSource-givenname" placeholder="Muster" name="givenname" data-object="/infectionSource/person">
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 row required">
-                            <label for="infectionSource-familyname" class="col-sm-12 col-form-label">Nachname</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="col-sm-10 form-control" id="infectionSource-familyname" name="familyname" placeholder="Maxmann" data-object="/infectionSource/person">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 row">
-                        <div class="form-group col-sm-6 row">
-                            <label class="col-sm-12" for="infectionSource-address-street">Straße/Hausnummer</label>
-                            <div class="col-sm-12 row no-gutters">
-                                <input type="text" class="col-sm-10 form-control" id="infectionSource-address-street" name="street" placeholder="Straße" data-object="/infectionSource/person/address">
-                                <input type="text" class="col-sm-2 form-control" id="infectionSource-address-house" name="house" placeholder="Nr." data-object="/infectionSource/person/address">
-                            </div>
-                        </div>
-
-                        <div class="form-group col-sm-6 row">
-                            <label class="col-sm-12" for="infectionSource-address-zip">Postleitzahl</label>
-                            <div class="col-sm-12 row no-gutters">
-                                <input type="text" class="col-sm-10 form-control" id="infectionSource-address-zip" name="zip" placeholder="PLZ" data-object="/infectionSource/person/address">
-                            </div>
-                        </div>
-
-                        <div class="form-group col-sm-6 row">
-                            <label class="col-sm-12" for="infectionSource-address-city">Stadt</label>
-                            <div class="col-sm-12 row no-gutters">
-                                <input type="text" class="col-sm-10 form-control" id="infectionSource-address-city" name="city" placeholder="München" data-object="/infectionSource/person/address">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-6 row required">
-                        <label class="col-sm-12" for="infectionSource-address-phone">Telefon</label>
-                        <div class="col-sm-12 row no-gutters">
-                            <input type="text" class="col-sm-10 form-control" id="infectionSource-address-phone" name="phone" placeholder="0891234567" data-object="/infectionSource/person/contact">
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-6 row">
-                        <label class="col-sm-12" for="infectionSource-address-email">E-mail</label>
-                        <div class="col-sm-12 row no-gutters">
-                            <input type="email" class="col-sm-10 form-control" id="infectionSource-address-email" name="email" placeholder="abc@mail.de" data-object="/infectionSource/person/contact">
-                        </div>
-                    </div>
-
                     <div class="form-group col-sm-12 row no-gutters">
                         <label for="infectionSource-comment">Kommentar</label>
                         <textarea name="comment" class="form-control" id="infectionSource-comment" rows="3" data-object="/infectionSource"></textarea>
@@ -1225,9 +1225,22 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="preconditions" id="preconditions13" value="Sonstige" data-object="/preconditions">
+                                <input class="form-check-input" type="checkbox" name="preconditions" id="preconditions13" value="Schwangerschaft" data-object="/preconditions">
                                 <div>
-                                    <label class="otherPreconditions form-check-label" for="preconditions13">Sonstige</label>
+                                    <label class="otherPreconditions form-check-label" for="preconditions13">Schwangerschaft; Entbindungstermin</label>
+                                </div>
+                                <input type="text" class="otherPreconditions form-control datepicker-future" id="pregnancyDueDate" name="pregnancyDueDate" placeholder="01-01-2021" data-object="/preconditions">
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="preconditions" id="preconditions14" value="Wochenbett" data-object="/preconditions">
+                                <label class="form-check-label" for="preconditions14">Wochenbett</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="preconditions" id="preconditions15" value="Sonstige" data-object="/preconditions">
+                                <div>
+                                    <label class="otherPreconditions form-check-label" for="preconditions15">Sonstige</label>
                                     <input type="text" class="otherPreconditions form-control" id="other" name="other" data-object="/preconditions">
                                 </div>
                             </div>

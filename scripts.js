@@ -20,6 +20,11 @@ $( function() {
         dateFormat: 'dd-mm-yy',
         maxDate: '0'
     });
+
+    $( ".datepicker-future" ).datepicker({
+        dateFormat: 'dd-mm-yy',
+        minDate: '0'
+    });
 } );
 
 /* Form construction and validation */
@@ -118,36 +123,51 @@ function getContactPersonMarkup(index) {
         '                    <div class="form-group col-sm-6 row required">\n' +
         '                        <label for="contact-person-givenname' + index + '" class="col-sm-12">Vorname</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +
-        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-givenname' + index + '" placeholder="Max" data-object="/contactPersons/' + index + '" required>\n' +
+        '                            <input type="text" class="col-sm-10 form-control" name="givenname" id="contact-person-givenname' + index + '" placeholder="Max" data-object="/contactPersons/' + index + '" required>\n' +
         '                        </div>\n' +
         '                    </div>\n' +
         '\n' +
         '                    <div class="form-group col-sm-6 row required">\n' +
         '                        <label for="contact-person-familyname' + index + '" class="col-sm-12">Nachname</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +
-        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-familyname' + index + '" placeholder="Mustermann" data-object="/contactPersons/' + index + '" required>\n' +
+        '                            <input type="text" class="col-sm-10 form-control" name="familyname" id="contact-person-familyname' + index + '" placeholder="Mustermann" data-object="/contactPersons/' + index + '" required>\n' +
         '                        </div>\n' +
         '                    </div>\n' +
+        '                   <div class="form-group col-sm-12 row">\n' +
+        '                       <legend class="col-sm-12 col-form-label pt-0">selber Haushalt</legend>\n' +
         '\n' +
-        '                    <div class="form-group col-sm-6 row required">\n' +
+        '                       <div class="col-sm-12">\n' +
+        '                           <div class="form-check form-check-inline">\n' +
+        '                               <input class="form-check-input" type="radio" name="contact-person-sameHousehold" id="contact-person-sameHousehold'+index+'-1" value="0" onclick="toggleSection(\'#contact-person-'+index+' .optionalSection\', true)" checked>\n' +
+        '                               <label class="form-check-label" for="contact-person-sameHousehold'+index+'-1">nein</label>\n' +
+        '                           </div>\n' +
+        '\n' +
+        '                           <div class="form-check form-check-inline">\n' +
+        '                               <input class="form-check-input" type="radio" name="contact-person-sameHousehold" id="contact-person-sameHousehold'+index+'-2" value="1" onclick="toggleSection(\'#contact-person-'+index+' .optionalSection\', false)">\n' +
+        '                               <label class="form-check-label" for="contact-person-sameHousehold'+index+'-2">ja</label>\n' +
+        '                           </div>\n' +
+        '                       </div>\n' +
+        '                   </div>' +
+        '\n' +
+        '                    <div class="form-group col-sm-6 row optionalSection">\n' +
         '                        <label class="col-sm-12" for="contact-person-street' + index + '">Straße/Hausnummer</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +
-        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-street' + index + '" name="street" placeholder="Straße" data-object="/contactPersons/' + index + '" required>\n' +
-        '                            <input type="text" class="col-sm-2 form-control" id="contact-person-house' + index + '" name="house" placeholder="Nr." data-object="/contactPersons/' + index + '" required>\n' +
+        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-street' + index + '" name="street" placeholder="Straße" data-object="/contactPersons/' + index + '">\n' +
+        '                            <input type="text" class="col-sm-2 form-control" id="contact-person-house' + index + '" name="house" placeholder="Nr." data-object="/contactPersons/' + index + '">\n' +
         '                        </div>\n' +
         '                    </div>\n' +
         '\n' +
-        '                    <div class="form-group col-sm-6 row required">\n' +
+        '                    <div class="form-group col-sm-6 row optionalSection">\n' +
         '                        <label class="col-sm-12" for="contact-person-zip' + index + '">Postleitzahl</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +
-        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-zip' + index + '" name="zip" placeholder="PLZ" data-object="/contactPersons/' + index + '" required>\n' +
+        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-zip' + index + '" name="zip" placeholder="PLZ" data-object="/contactPersons/' + index + '">\n' +
         '                        </div>\n' +
         '                    </div>\n' +
         '\n' +
-        '                    <div class="form-group col-sm-6 row required">\n' +
+        '                    <div class="form-group col-sm-6 row optionalSection">\n' +
         '                        <label class="col-sm-12" for="contact-person-city' + index + '">Stadt</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +
-        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-city' + index + '" name="city" placeholder="München" data-object="/contactPersons/' + index + '" required>\n' +
+        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-city' + index + '" name="city" placeholder="München" data-object="/contactPersons/' + index + '">\n' +
         '                        </div>\n' +
         '                    </div>\n' +
         '\n' +
@@ -158,11 +178,20 @@ function getContactPersonMarkup(index) {
         '                        </div>\n' +
         '                    </div>\n' +
         '\n' +
-        '                    <div class="form-group col-sm-6 row required">\n' +
+        '                    <div class="form-group col-sm-6 row">\n' +
         '                        <label class="col-sm-12" for="contact-person-email' + index + '">E-Mail</label>\n' +
         '                        <div class="col-sm-12 row no-gutters">\n' +
-        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-email' + index + '" name="email" placeholder="abc@mail.de" data-object="/contactPersons/' + index + '" required>\n' +
+        '                            <input type="text" class="col-sm-10 form-control" id="contact-person-email' + index + '" name="email" placeholder="abc@mail.de" data-object="/contactPersons/' + index + '">\n' +
         '                        </div>\n' +
         '                    </div>\n' +
+        '                    <div class="form-group col-sm-6 row d-flex align-items-end no-gutters required">\n' +
+        '                       <label class="col-sm-12" for="contact-person-symptoms' + index + '">Hat/Hatte diese Person Covid-19-typische Symptome?</label>\n' +
+        '                       <select name="hasSymptoms" id="contact-person-symptoms' + index + '" class="col-sm-12 custom-select" data-object="/contactPersons/' + index + '">\n' +
+        '                           <option value="" selected>Bitte auswählen</option>\n' +
+        '                           <option value="Ja">Ja</option>\n' +
+        '                           <option value="Nein">Nein</option>\n' +
+        '                           <option value="Nicht Bekannt">Nicht Bekannt</option>\n' +
+        '                       </select>\n' +
+        '                   </div>' +
         '                </div>';
 }
