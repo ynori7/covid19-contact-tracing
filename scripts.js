@@ -15,17 +15,21 @@ function checkCountry() {
     }
 }
 
-$( function() {
-    $( ".datepicker" ).datepicker({
+$(function () {
+    datePickerInit();
+});
+
+function datePickerInit() {
+    $(".datepicker").datepicker({
         dateFormat: 'dd-mm-yy',
         maxDate: '0'
     });
 
-    $( ".datepicker-future" ).datepicker({
+    $(".datepicker-future").datepicker({
         dateFormat: 'dd-mm-yy',
         minDate: '0'
     });
-} );
+}
 
 /* Form construction and validation */
 var jsonForm = {};
@@ -115,6 +119,8 @@ function addContactPerson() {
     }, 500);
 
     contactPersonIndex++;
+
+    datePickerInit();
 }
 
 function getContactPersonMarkup(index) {
@@ -146,6 +152,12 @@ function getContactPersonMarkup(index) {
         '                               <input class="form-check-input" type="radio" name="contact-person-sameHousehold" id="contact-person-sameHousehold'+index+'-2" value="1" onclick="toggleSection(\'#contact-person-'+index+' .optionalSection\', false)">\n' +
         '                               <label class="form-check-label" for="contact-person-sameHousehold'+index+'-2">ja</label>\n' +
         '                           </div>\n' +
+        '                       </div>\n' +
+        '                   </div>' +
+        '                   <div class="form-group col-sm-6 row optionalSection required">\n' +
+        '                       <label class="col-sm-12" for="contact-person-lastDayOfContact"' + index + '">Letzter Kontakt</label>\n' +
+        '                       <div class="col-sm-12 row no-gutters">\n' +
+        '                           <input type="text" class="col-sm-10 form-control datepicker" id="contact-person-lastDayOfContact' + index + '" name="lastDayOfContact" data-object="/contactPersons/' + index + '" placeholder="01-01-2020">\n' +
         '                       </div>\n' +
         '                   </div>' +
         '\n' +

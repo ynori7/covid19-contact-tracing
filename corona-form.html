@@ -539,13 +539,13 @@
                     <!-- Infection contact person -->
                     <h4 class="col-sm-12">Person</h4>
                     <div class="col-sm-12 row">
-                        <div class="form-group col-sm-6 row required">
+                        <div class="form-group col-sm-6 row">
                             <label for="infectionSource-givenname" class="col-sm-12 col-form-label">Vorname</label>
                             <div class="col-sm-12">
                                 <input type="text" class="col-sm-10 form-control" id="infectionSource-givenname" placeholder="Muster" name="givenname" data-object="/infectionSource/person">
                             </div>
                         </div>
-                        <div class="form-group col-sm-6 row required">
+                        <div class="form-group col-sm-6 row">
                             <label for="infectionSource-familyname" class="col-sm-12 col-form-label">Nachname</label>
                             <div class="col-sm-12">
                                 <input type="text" class="col-sm-10 form-control" id="infectionSource-familyname" name="familyname" placeholder="Maxmann" data-object="/infectionSource/person">
@@ -577,7 +577,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-sm-6 row required">
+                    <div class="form-group col-sm-6 row">
                         <label class="col-sm-12" for="infectionSource-address-phone">Telefon</label>
                         <div class="col-sm-12 row no-gutters">
                             <input type="text" class="col-sm-10 form-control" id="infectionSource-address-phone" name="phone" placeholder="0891234567" data-object="/infectionSource/person/contact">
@@ -969,7 +969,7 @@
 
                 <div id="symptomsInfo" class="col-sm-12 row">
                     <!-- Symptom dates -->
-                    <div class="form-group col-sm-6 row no-gutters">
+                    <div class="form-group col-sm-6 row no-gutters required">
                         <label class="col-sm-12" for="symptoms-beginDate">Symptombeginn</label>
                         <div class="col-sm-12 row no-gutters">
                             <input type="text" class="col-sm-12 form-control datepicker" id="symptoms-beginDate" name="beginDate" placeholder="01-01-2020" data-object="/symptoms">
@@ -1265,7 +1265,7 @@
             <div class="row">
                 <h3 class="col-sm-12"><span>Kontaktpersonen</span></h3>
                 <div class="col-sm-12">
-                    <p>Melden Sie uns alle Personen mit denen Sie im Zeitraum von 2 Tagen <strong>vor</strong> Symptombeginn bzw. bei Symptomfreiheit 7 Tage <strong>vor</strong> positiver Testung engen Kontakt
+                    <p>Melden Sie uns alle Personen mit denen Sie im Zeitraum von 2 Tagen <strong>vor</strong> Symptombeginn bzw. bei Symptomfreiheit 2 Tage <strong>vor</strong> positiver Testung engen Kontakt
                         (<a href="https://www.muenchen.de/rathaus/Stadtverwaltung/Referat-fuer-Gesundheit-und-Umwelt/Infektionsschutz/Neuartiges_Coronavirus/Informationen-f-r-Kontaktpersonen.html#1" target="_blank">Wer ist Kontaktpersonen 1. Grades?</a>) hatten.</p>
                 </div>
             </div>
